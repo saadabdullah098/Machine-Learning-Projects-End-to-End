@@ -10,7 +10,7 @@ app=application
 
 ## Import linear regression model and standard scaler pickle to allow web interaction
 linreg_model=pickle.load(open('models/linreg.pkl','rb'))
-standard_scaler=pickle.load(open('models/scaler.pkl','rb'))
+standard_scaler=pickle.load(open('models/linear_regression_scaler.pkl','rb'))
 
 ## Route for home page
 @app.route('/')
