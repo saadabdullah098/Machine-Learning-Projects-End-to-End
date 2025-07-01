@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fire Weather Index Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f5f5f5;
+            margin: 0;
+        }
+        
+        .login {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        label {
+            font-weight: 600;
+            color: #333;
+            display: block;
+            margin-top: 15px;
+        }
+        
+        input[type="number"], select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 16px;
+            margin-top: 5px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+        
+        input[type="number"]:focus, select:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+        
+        small {
+            display: block;
+            margin-top: 3px;
+            margin-bottom: 8px;
+            font-size: 12px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 16px 32px;
+            margin: 20px 0 0 0;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+            box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+        }
+        
+        .btn-primary:hover {
+            background-color: #0056b3;
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
+            transform: translateY(-1px);
+        }
+        
+        .btn-primary:active {
+            background-color: #004085;
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+        }
+        
+        .note-box {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+            border-left: 4px solid #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="login">
+       <h1>Fire Weather Index Prediction</h1>
+       <p style="margin-bottom: 20px; color: #666; text-align: center;">Enter the data below to predict fire weather conditions.</p>
+   
+        <!-- Main Input For Receiving Query to our ML -->
+       <form action="{{ url_for('show_results')}}" method="post">
+         <label for="Temperature">Temperature (°C):</label>
+         <small style="color: #666;">Acceptable: -40 to 50°C | Model Training Range: 22-42°C</small>
+         <input type="number" name="Temperature" id="Temperature" min="-40" max="50" step="0.1" required="required" />
+         
+         <label for="RH">Relative Humidity (%):</label>
+         <small style="color: #666;">Acceptable: 0-100% | Model Training Range: 21-90%</small>
+         <input type="number" name="RH" id="RH" min="0" max="100" step="0.1" required="required" />
+         
+         <label for="Ws">Wind Speed (km/h):</label>
+         <small style="color: #666;">Acceptable: 0-200 km/h | Model Training Range: 6-29 km/h</small>
+         <input type="number" name="Ws" id="Ws" min="0" max="200" step="0.1" required="required" />
+         
+         <label for="Rain">Rain (mm):</label>
+         <small style="color: #666;">Acceptable: 0-500 mm | Model Training Range: 0-16.8 mm</small>
+         <input type="number" name="Rain" id="Rain" min="0" max="500" step="0.1" required="required" />
+         
+         <label for="FFMC">Fine Fuel Moisture Code (FFMC):</label>
+         <small style="color: #666;">Acceptable: 0-101 | Model Training Range: 28.6-92.5 | High: >70, Extreme: >90</small>
+         <input type="number" name="FFMC" id="FFMC" min="0" max="101" step="0.1" required="required" />
+         
+         <label for="DMC">Duff Moisture Code (DMC):</label>
+         <small style="color: #666;">Acceptable: 0-500 | Model Training Range: 1.1-65.9 | Extreme: >63</small>
+         <input type="number" name="DMC" id="DMC" min="0" max="500" step="0.1" required="required" />
+         
+         <label for="ISI">Initial Spread Index (ISI):</label>
+         <small style="color: #666;">Acceptable: 0-50 | Model Training Range: 0-18.5 | Extreme: >19</small>
+         <input type="number" name="ISI" id="ISI" min="0" max="50" step="0.1" required="required" />
+         
+         <label for="Region">Region:</label>
+         <select name="Region" id="Region" required="required">
+           <option value="">Select region</option>
+           <option value="0">0 - Bejaia Region</option>
+           <option value="1">1 - Sidi-Bel Abbes Region</option>
+         </select>
+   
+         <button type="submit" class="btn btn-primary">Predict Fire Weather Index</button>
+       </form>
+       
+       <div class="note-box">
+           <small><strong>Note:</strong> Model was trained on the specified training ranges. Values outside these ranges may produce less reliable predictions, though the system accepts the broader acceptable ranges shown.</small>
+       </div>
+   </div>
+</body>
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fire Weather Index Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f5f5f5;
+            margin: 0;
+            line-height: 1.6;
+        }
+        
+        .login {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+        
+        h2 {
+            color: #333;
+            font-size: 22px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+        }
+        
+        h3 {
+            color: #007bff;
+            font-size: 18px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .intro-section {
+            background-color: #e8f4fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid #007bff;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .feature-card {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+        }
+        
+        .feature-card h3 {
+            color: #28a745;
+            margin-top: 0;
+        }
+        
+        .prediction-info {
+            background-color: #fff3cd;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .start-section {
+            text-align: center;
+            margin: 40px 0;
+            padding: 30px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 16px 32px;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+        
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+            box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+        }
+        
+        .btn-primary:hover {
+            background-color: #0056b3;
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
+            transform: translateY(-1px);
+        }
+        
+        ul {
+            padding-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .highlight {
+            background-color: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="login">
+        <h1>Welcome to the Fire Weather Index Predictor</h1>
+        
+        <div class="intro-section">
+            <h2 style="margin-top: 0; border: none; padding: 0;">About This Program</h2>
+            <p>The Fire Weather Index (FWI) Predictor is a machine learning-based tool that estimates fire weather conditions and potential fire behavior. Using meteorological and environmental data, this system provides a numerical rating (0-50+) that indicates the likelihood and intensity of fire weather conditions in a given area.</p>
+            <p>This tool is designed for fire management professionals, researchers, and anyone interested in understanding fire weather patterns in the Bejaia and Sidi-Bel Abbes regions of Algeria.</p>
+        </div>
+
+        <h2>Input Parameters Explained</h2>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>🌡️ Temperature</h3>
+                <p>Air temperature in degrees Celsius. Higher temperatures increase fire risk by drying out vegetation and creating conditions favorable for ignition and spread.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>💧 Relative Humidity</h3>
+                <p>The amount of moisture in the air as a percentage. Lower humidity means drier conditions, which increase fire danger by making vegetation more combustible.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>🌬️ Wind Speed</h3>
+                <p>Wind velocity in km/h. Wind affects fire spread rate and direction. Higher wind speeds can rapidly escalate fire intensity and make suppression more difficult.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>🌧️ Rain</h3>
+                <p>Precipitation in millimeters. Recent rainfall increases moisture content in vegetation and soil, reducing fire risk and helping with natural fire suppression.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>🔥 Fine Fuel Moisture Code (FFMC)</h3>
+                <p>Indicates moisture content of fine dead fuels (leaves, twigs). Values range 0-101, where higher values mean drier conditions and increased ignition potential.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>🌿 Duff Moisture Code (DMC)</h3>
+                <p>Represents moisture content of decomposed organic matter below the surface. Higher values indicate drier subsurface conditions that can sustain deeper burning.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>⚡ Initial Spread Index (ISI)</h3>
+                <p>Combines wind speed and FFMC to indicate the expected rate of fire spread. Higher ISI values suggest fires will spread more rapidly across the landscape.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>🌍 Target Regions</h3>
+                <p>This model is specifically trained for <span class="highlight">Bejaia</span> (northeastern Algeria) and <span class="highlight">Sidi-Bel Abbes</span> (northwestern Algeria) regions, accounting for their unique Mediterranean and semi-arid climate patterns and vegetation types.</p>
+            </div>
+        </div>
+
+        <div class="prediction-info">
+            <h2 style="margin-top: 0; border: none; padding: 0;">What the Prediction Means</h2>
+            <p>The FWI prediction provides a <strong>numerical fire weather rating</strong> that helps assess fire danger:</p>
+            <ul>
+                <li><strong>Low (0-8):</strong> Minimal fire danger - fires unlikely to start or spread significantly</li>
+                <li><strong>Moderate (9-16):</strong> Some fire activity possible - normal fire management procedures apply</li>
+                <li><strong>High (17-24):</strong> Increased fire danger - heightened awareness and preparation needed</li>
+                <li><strong>Very High (25-34):</strong> Serious fire conditions - active fire management and monitoring required</li>
+                <li><strong>Extreme (35+):</strong> Critical fire weather - maximum fire danger with potential for explosive fire behavior</li>
+            </ul>
+            <p><strong>Important:</strong> This prediction is most reliable when input values fall within the model's training ranges. The system will alert you if values are outside these ranges, which may affect prediction accuracy.</p>
+        </div>
+
+        <div class="start-section">
+            <h2 style="margin-top: 0; color: #333;">Ready to Make a Prediction?</h2>
+            <p>Enter your meteorological and environmental data to get an instant Fire Weather Index prediction for your area.</p>
+            <a href="{{ url_for('predict_datapoint') }}" class="btn btn-primary">Start FWI Prediction</a>
+        </div>
+    </div>
+</body>
+</html>

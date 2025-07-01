@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FWI Prediction Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f5f5f5;
+            margin: 0;
+        }
+        
+        .login {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+        
+        h2 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        
+        h3 {
+            color: #333;
+            font-size: 20px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+        }
+        
+        .results-section {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+        }
+        
+        .fwi-explanation {
+            background-color: #e8f4fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #007bff;
+        }
+        
+        .fwi-scale {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .fwi-level {
+            text-align: center;
+            padding: 10px;
+            border-radius: 6px;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        
+        .low { background-color: #28a745; }
+        .moderate { background-color: #ffc107; color: #333; }
+        .high { background-color: #fd7e14; }
+        .very-high { background-color: #dc3545; }
+        .extreme { background-color: #6f42c1; }
+        
+        .warning-box {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-left: 4px solid #f39c12;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+        
+        .error-box {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+        
+        .input-summary {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .input-summary p {
+            margin: 8px 0;
+            line-height: 1.4;
+        }
+        
+        .out-of-range {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        
+        .actions {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 16px 32px;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0 10px;
+        }
+        
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+            box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+        }
+        
+        .btn-primary:hover {
+            background-color: #0056b3;
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
+            transform: translateY(-1px);
+        }
+        
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+            box-shadow: 0 2px 4px rgba(108, 117, 125, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #545b62;
+            box-shadow: 0 4px 8px rgba(108, 117, 125, 0.4);
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body>
+    <div class="login">
+        <h1>FWI Prediction Results</h1>
+        
+        <div class="results-section">
+            <h2>THE FWI prediction is {{result}}</h2>
+        </div>
+        
+        <div class="fwi-explanation">
+            <h3>Fire Weather Index (FWI) Explanation</h3>
+            <p><strong>What is FWI?</strong> The Fire Weather Index is a numerical rating of fire intensity that combines initial spread index and available fuel to indicate the potential fire behavior and difficulty of suppression.</p>
+            
+            <p><strong>Acceptable FWI Range:</strong> 0 to 50+ (higher values indicate more severe fire weather conditions)</p>
+            
+            <div class="fwi-scale">
+                <div class="fwi-level low">LOW<br>0-8</div>
+                <div class="fwi-level moderate">MODERATE<br>9-16</div>
+                <div class="fwi-level high">HIGH<br>17-24</div>
+                <div class="fwi-level very-high">VERY HIGH<br>25-34</div>
+                <div class="fwi-level extreme">EXTREME<br>35+</div>
+            </div>
+            
+            <ul style="margin-top: 15px; padding-left: 20px;">
+                <li><strong>Low (0-8):</strong> Fire behavior is generally predictable with low fire intensity</li>
+                <li><strong>Moderate (9-16):</strong> Fire behavior is moderate with some potential for aggressive fire activity</li>
+                <li><strong>High (17-24):</strong> Fire behavior is more intense and less predictable</li>
+                <li><strong>Very High (25-34):</strong> Fire behavior is intense and erratic with potential for significant fire activity</li>
+                <li><strong>Extreme (35+):</strong> Fire behavior is explosive and extremely dangerous</li>
+            </ul>
+        </div>
+        
+        <!-- Prediction Reliability Check -->
+        {% set out_of_range_inputs = [] %}
+        {% if input_data.Temperature|float < 22 or input_data.Temperature|float > 42 %}
+            {% set _ = out_of_range_inputs.append('Temperature') %}
+        {% endif %}
+        {% if input_data.RH|float < 21 or input_data.RH|float > 90 %}
+            {% set _ = out_of_range_inputs.append('Relative Humidity') %}
+        {% endif %}
+        {% if input_data.Ws|float < 6 or input_data.Ws|float > 29 %}
+            {% set _ = out_of_range_inputs.append('Wind Speed') %}
+        {% endif %}
+        {% if input_data.Rain|float < 0 or input_data.Rain|float > 16.8 %}
+            {% set _ = out_of_range_inputs.append('Rain') %}
+        {% endif %}
+        {% if input_data.FFMC|float < 28.6 or input_data.FFMC|float > 92.5 %}
+            {% set _ = out_of_range_inputs.append('FFMC') %}
+        {% endif %}
+        {% if input_data.DMC|float < 1.1 or input_data.DMC|float > 65.9 %}
+            {% set _ = out_of_range_inputs.append('DMC') %}
+        {% endif %}
+        {% if input_data.ISI|float < 0 or input_data.ISI|float > 18.5 %}
+            {% set _ = out_of_range_inputs.append('ISI') %}
+        {% endif %}
+        
+        {% if out_of_range_inputs|length > 0 %}
+        <div class="error-box">
+            <h4 style="color: #721c24; margin-top: 0;">⚠️ Prediction Reliability Warning</h4>
+            <p><strong>This prediction may be incorrect!</strong> The following input values are outside the model's training range:</p>
+            <ul>
+                {% for param in out_of_range_inputs %}
+                <li><strong>{{param}}</strong></li>
+                {% endfor %}
+            </ul>
+            <p>The model was trained on specific data ranges and may not accurately predict FWI values for inputs outside these ranges. Please consider the prediction with caution.</p>
+        </div>
+        {% else %}
+        <div class="warning-box">
+            <h4 style="color: #856404; margin-top: 0;">✅ Prediction Reliability</h4>
+            <p>All input values are within the model's training range. This prediction should be reliable based on the training data.</p>
+        </div>
+        {% endif %}
+        
+        <div class="input-summary">
+            <h3>Input Data Summary:</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 15px 0;">
+                <div>
+                    <p><strong>Temperature:</strong> {{input_data.Temperature}}°C <span style="color: #666; font-size: 12px;">(Model Training Range: 22-42°C)</span></p>
+                    <p><strong>Relative Humidity:</strong> {{input_data.RH}}% <span style="color: #666; font-size: 12px;">(Model Training Range: 21-90%)</span></p>
+                    <p><strong>Wind Speed:</strong> {{input_data.Ws}} km/h <span style="color: #666; font-size: 12px;">(Model Training Range: 6-29 km/h)</span></p>
+                    <p><strong>Rain:</strong> {{input_data.Rain}} mm <span style="color: #666; font-size: 12px;">(Model Training Range: 0-16.8 mm)</span></p>
+                </div>
+                <div>
+                    <p><strong>FFMC:</strong> {{input_data.FFMC}} <span style="color: #666; font-size: 12px;">(Model Training Range: 28.6-92.5)</span></p>
+                    <p><strong>DMC:</strong> {{input_data.DMC}} <span style="color: #666; font-size: 12px;">(Model Training Range: 1.1-65.9)</span></p>
+                    <p><strong>ISI:</strong> {{input_data.ISI}} <span style="color: #666; font-size: 12px;">(Model Training Range: 0-18.5)</span></p>
+                    <p><strong>Region:</strong> 
+                        {% if input_data.Region == '0' %}
+                            Bejaia Region
+                        {% else %}
+                            Sidi-Bel Abbes Region
+                        {% endif %}
+                        <span style="color: #666; font-size: 12px;">({{input_data.Region}})</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="actions">
+            <a href="{{ url_for('predict_datapoint') }}" class="btn btn-primary">Make New Prediction</a>
+        </div>
+    </div>
+</body>
+</html>
