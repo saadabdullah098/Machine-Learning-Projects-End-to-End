@@ -26,36 +26,47 @@
 2. Create an AWS Elastic Beanstalk environment with these configurations:
 
    Environment Tier: Web server environment
+
    Application Name: <any name>
+
    Platform: Python
+
    Plotform Branch: Python 3.9
+
    Application Code: Sample application
+
    Presets: Single Instance
 
    For Service role and EC2 instance profile, create a new role with default settings.
+
    Skip to Review and press Create
 
 4. Create a AWS CodePipline with these configurations:
 
    Build custom pipeline
+
    Pipeline name: <any name>
+
    Service role: New service role
+
    Role name: <any name>
 
    Source provider: Github (connect to the repo containing the app)
+
    Skip Build and Test stage
 
    Deploy Provider: AWS Elastic Beanstalk
 
    Application Name: <AWS Beanstalk Env that was created previously>
+
    Environment Name: <AWS Beanstalk Env that was created previously>
 
    Create Pipeline
    
-5. It will take some time to start up, but if everything works, there will be a URL in the Beanstalk environment for the app
+6. It will take some time to start up, but if everything works, there will be a URL in the Beanstalk environment for the app
    The app continuously updates as changes are made in GitHub
 
-6. Remember to Terminate or Delete Environments and Pipelines if not for future use to prevent AWS fee charges
+7. Remember to Terminate or Delete Environments and Pipelines if not for future use to prevent AWS fee charges
 
 ## File Descriptions 
 
