@@ -27,7 +27,7 @@
 
    Environment Tier: Web server environment
 
-   Application Name: <any name>
+   Application Name: any name
 
    Platform: Python
 
@@ -45,11 +45,11 @@
 
    Build custom pipeline
 
-   Pipeline name: <any name>
+   Pipeline name: any name
 
    Service role: New service role
 
-   Role name: <any name>
+   Role name: any name
 
    Source provider: Github (connect to the repo containing the app)
 
@@ -57,9 +57,9 @@
 
    Deploy Provider: AWS Elastic Beanstalk
 
-   Application Name: <AWS Beanstalk Env that was created previously>
+   Application Name: AWS Beanstalk Env that was created previously
 
-   Environment Name: <AWS Beanstalk Env that was created previously>
+   Environment Name: AWS Beanstalk Env that was created previously
 
    Create Pipeline
    
