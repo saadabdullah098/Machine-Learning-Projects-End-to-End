@@ -24,6 +24,7 @@
 1. Ensure that the .ebextensions and Procfile exists
 
 2. Create an AWS Elastic Beanstalk environment with these configurations:
+
    Environment Tier: Web server environment
    Application Name: <any name>
    Platform: Python
@@ -34,7 +35,8 @@
    For Service role and EC2 instance profile, create a new role with default settings.
    Skip to Review and press Create
 
-3. Create a AWS CodePipline with these configurations:
+4. Create a AWS CodePipline with these configurations:
+
    Build custom pipeline
    Pipeline name: <any name>
    Service role: New service role
@@ -50,10 +52,10 @@
 
    Create Pipeline
    
-4. It will take some time to start up, but if everything works, there will be a URL in the Beanstalk environment for the app
+5. It will take some time to start up, but if everything works, there will be a URL in the Beanstalk environment for the app
    The app continuously updates as changes are made in GitHub
 
-5. Remember to Terminate or Delete Environments and Pipelines if not for future use to prevent AWS fee charges
+6. Remember to Terminate or Delete Environments and Pipelines if not for future use to prevent AWS fee charges
 
 ## File Descriptions 
 
